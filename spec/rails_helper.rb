@@ -58,4 +58,8 @@ RSpec.configure do |config|
     include_default_accept_headers
   end
 
+  config.mock_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
+
 end
