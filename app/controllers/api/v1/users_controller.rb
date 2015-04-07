@@ -7,6 +7,8 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     user = User.new user_params
+    # binding.remote_pry
+    # en el terminal poner: pry-remote
     if user.save
       render json: user, status: 201, location: [:api, user]
     else
