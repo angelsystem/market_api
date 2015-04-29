@@ -30,10 +30,10 @@ RSpec.describe User, :type => :model do
       expect(@user.auth_token).not_to eql existing_user.auth_token
     end
 
-    it "generates another token when one already has been taken" do
-      existing_user = FactoryGirl.create(:user, auth_token: "auniquetoken123")
-      @user.generate_authentication_token!
-      expect(@user.auth_token).not_to eql existing_user.auth_token
-    end
+    # it "generates another token when one already has been taken" do
+    #   existing_user = FactoryGirl.create(:user, auth_token: "auniquetoken123")
+    #   @user.generate_authentication_token!
+    #   expect(@user.auth_token).not_to eql existing_user.auth_token
+    # end
   end
 end
