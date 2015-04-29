@@ -14,6 +14,7 @@ RSpec.describe Api::V1::UsersController, :type => :controller do
     end
 
     it { should respond_with 200 }
+
   end
 
 
@@ -58,12 +59,14 @@ RSpec.describe Api::V1::UsersController, :type => :controller do
 
 
   describe "PUT/PATCH #update" do
+    before(:each) do
+      @user = FactoryGirl.create :user
+      api_authorization_header @user.auth_token
+    end
 
     context "when is successfully updated" do
       before(:each) do
-        @user = FactoryGirl.create :user
-        patch :update, { id: @user.id,
-                         user: { email: "newmail@example.com" } }
+        patch :update, { id: @user.id, user: { email: "newmail@example.com" } }
       end
 
       it "renders the json representation for the updated user" do
@@ -74,11 +77,9 @@ RSpec.describe Api::V1::UsersController, :type => :controller do
       it { should respond_with 200 }
     end
 
-    context "when is not created" do
+    context "when is not updated" do
       before(:each) do
-        @user = FactoryGirl.create :user
-        patch :update, { id: @user.id,
-                         user: { email: "bademail.com" } }
+        patch :update, { id: @user.id, user: { email: "bademail.com" } }
       end
 
       it "renders an errors json" do
@@ -95,13 +96,15 @@ RSpec.describe Api::V1::UsersController, :type => :controller do
     end
   end
 
-
   describe "DELETE #destroy" do
     before(:each) do
       @user = FactoryGirl.create :user
+      api_authorization_header @user.auth_token
       delete :destroy, { id: @user.id }
     end
+
     it { should respond_with 204 }
+
   end
 
 end
