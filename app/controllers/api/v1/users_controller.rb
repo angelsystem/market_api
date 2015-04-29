@@ -3,6 +3,7 @@ class Api::V1::UsersController < ApplicationController
   # en el terminal poner: pry-remote
 
   before_action :authenticate_with_token!, only: [:update, :destroy]
+
   respond_to :json
 
   def show

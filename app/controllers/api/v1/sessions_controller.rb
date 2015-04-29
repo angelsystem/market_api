@@ -4,9 +4,6 @@ class Api::V1::SessionsController < ApplicationController
   def create
     # binding.remote_pry
     # en el terminal poner: pry-remote
-
-
-    # binding.remote_pry
     user_password = params[:session][:password]
     user_email = params[:session][:email]
     user = user_email.present? && User.find_by(email: user_email)
